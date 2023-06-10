@@ -5,6 +5,7 @@ import { EmergencyContactsProvider } from './EmergencyContactsContext';
 import Home from './Home';
 import EmergencyContacts from './EmergencyContacts';
 import LiveLocation from './LiveLocation';
+import PanicFeatures from './PanicFeatures'; // Import the PanicFeatures component
 
 const Navigation = () => {
   const location = useLocation();
@@ -24,6 +25,9 @@ const Navigation = () => {
         <li>
           <Link to="/gps">Update or Activate GPS</Link>
         </li>
+        <li> {/* Add the Panic Features link */}
+          <Link to="/panic-features">Panic Features</Link>
+        </li>
       </ul>
     </nav>
   );
@@ -33,7 +37,7 @@ const Root = () => {
   return (
     <Router>
       <div>
-        <h1>Welcome to the Home Page</h1>
+        <h1>MeG ~ My eGuardian</h1>
 
         <Navigation />
 
@@ -41,6 +45,7 @@ const Root = () => {
           <Route path="/" element={<Home />} />
           <Route path="/emergency-contacts" element={<EmergencyContacts />} />
           <Route path="/gps" element={<LiveLocation />} />
+          <Route path="/panic-features" element={<PanicFeatures />} /> {/* Add the PanicFeatures component route */}
         </Routes>
       </div>
     </Router>

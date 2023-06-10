@@ -31,12 +31,12 @@ const EmergencyContacts = () => {
     setRelationship('');
   };
 
-  const placeholderContact = {
-    name: 'John Doe',
-    phoneNumber: '555-1234',
-    email: 'johndoe@example.com',
-    relationship: 'Friend',
-  };
+  // const placeholderContact = {
+  //   name: 'John Doe',
+  //   phoneNumber: '555-1234',
+  //   email: 'johndoe@example.com',
+  //   relationship: 'Friend',
+  // };
 
   return (
     <div>
@@ -92,7 +92,7 @@ const EmergencyContacts = () => {
         </ul>
       )}
 
-      <h3>Placeholder Contact:</h3>
+      {/* <h3>Placeholder Contact:</h3>
       <label>
         Show Placeholder Contact:
         <input
@@ -110,7 +110,7 @@ const EmergencyContacts = () => {
             <strong>Relationship:</strong> {placeholderContact.relationship}
           </li>
         </ul>
-      )}
+      )} */}
     </div>
   );
 };
