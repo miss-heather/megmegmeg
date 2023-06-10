@@ -33,12 +33,12 @@ const LiveLocation = ({ emergencyContacts }) => {
     return () => clearInterval(interval);
   }, []);
 
-  const placeholderContact = {
-    name: 'John Doe',
-    phoneNumber: '555-1234',
-    email: 'johndoe@example.com',
-    relationship: 'Friend',
-  };
+//   const placeholderContact = {
+//     name: 'John Doe',
+//     phoneNumber: '555-1234',
+//     email: 'johndoe@example.com',
+//     relationship: 'Friend',
+//   };
 
   return (
     <div>

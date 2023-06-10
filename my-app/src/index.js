@@ -19,15 +19,21 @@ const Navigation = () => {
             <Link to="/">Home</Link>
           </li>
         )}
-        <li>
-          <Link to="/emergency-contacts">Emergency Contacts</Link>
-        </li>
-        <li>
-          <Link to="/gps">Update or Activate GPS</Link>
-        </li>
-        <li> {/* Add the Panic Features link */}
-          <Link to="/panic-features">Panic Features</Link>
-        </li>
+        {location.pathname !== '/emergency-contacts' && (
+          <li>
+            <Link to="/emergency-contacts">Emergency Contacts</Link>
+          </li>
+        )}
+        {location.pathname !== '/gps' && (
+          <li>
+            <Link to="/gps">Update or Activate GPS</Link>
+          </li>
+        )}
+        {location.pathname !== '/panic-features' && (
+          <li>
+            <Link to="/panic-features">Panic Features</Link>
+          </li>
+        )}
       </ul>
     </nav>
   );
