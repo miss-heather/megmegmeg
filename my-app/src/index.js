@@ -1,39 +1,40 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { BrowserRouter as Router, Route, Routes, Link, useLocation } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Routes, Link } from 'react-router-dom';
 import { EmergencyContactsProvider } from './EmergencyContactsContext';
+import './css/emergencyContacts.css';
 import Home from './Home';
 import EmergencyContacts from './EmergencyContacts';
 import LiveLocation from './LiveLocation';
-import PanicFeatures from './PanicFeatures'; // Import the PanicFeatures component
+import PanicFeatures from './PanicFeatures';
+import SignUp from './SignUp';
+import SignIn from './SignIn';
 
 const Navigation = () => {
-  const location = useLocation();
-  const isHome = location.pathname === '/';
-
   return (
     <nav>
       <ul>
-        {!isHome && (
-          <li>
-            <Link to="/">Home</Link>
-          </li>
-        )}
-        {location.pathname !== '/emergency-contacts' && (
-          <li>
-            <Link to="/emergency-contacts">Emergency Contacts</Link>
-          </li>
-        )}
-        {location.pathname !== '/gps' && (
-          <li>
-            <Link to="/gps">Update or Activate GPS</Link>
-          </li>
-        )}
-        {location.pathname !== '/panic-features' && (
-          <li>
-            <Link to="/panic-features">Panic Features</Link>
-          </li>
-        )}
+        <ul>
+        <h3 className="new-here">New here?</h3>
+        </ul>
+        <ul>
+          <Link to="/signup">Sign Up</Link>
+        </ul>
+        <ul>
+          <Link to="/login">Login</Link>
+        </ul>
+
+        <br/>
+        
+        <li>
+          <Link to="/emergency-contacts">Emergency Contacts</Link>
+        </li>
+        <li>
+          <Link to="/gps">Update or Activate GPS</Link>
+        </li>
+        <li>
+          <Link to="/panic-features">Panic Features</Link>
+        </li>
       </ul>
     </nav>
   );
@@ -51,7 +52,9 @@ const Root = () => {
           <Route path="/" element={<Home />} />
           <Route path="/emergency-contacts" element={<EmergencyContacts />} />
           <Route path="/gps" element={<LiveLocation />} />
-          <Route path="/panic-features" element={<PanicFeatures />} /> {/* Add the PanicFeatures component route */}
+          <Route path="/panic-features" element={<PanicFeatures />} />
+          <Route path="/signup" element={<SignUp />} />
+          <Route path="/login" element={<SignIn />} />
         </Routes>
       </div>
     </Router>
@@ -60,7 +63,7 @@ const Root = () => {
 
 ReactDOM.render(
   <React.StrictMode>
-    <EmergencyContactsProvider> {/* Add the EmergencyContactsProvider component here */}
+    <EmergencyContactsProvider>
       <Root />
     </EmergencyContactsProvider>
   </React.StrictMode>,
