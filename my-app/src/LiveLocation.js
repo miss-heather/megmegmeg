@@ -7,7 +7,7 @@ const LiveLocation = ({ emergencyContacts }) => {
   const [accuracy, setAccuracy] = useState(0);
   const [engageEmergencyContact, setEngageEmergencyContact] = useState(false);
   const [emergencyContactName, setEmergencyContactName] = useState('');
-  const [notifyEmergencyContact, setNotifyEmergencyContact] = useState(false);
+  const [setUpParameters, setSetUpParameters] = useState(false);
 
   // Function to update the user's location
   const updateLocation = () => {
@@ -45,50 +45,61 @@ const LiveLocation = ({ emergencyContacts }) => {
         <p>Loading location...</p>
       )}
 
-      <h3>Tracking Parameters</h3>
+      <h3>Set up Location Parameters</h3>
       <label>
-        Distance (in miles):
+        Would you like to set up location parameters?
         <input
-          type="number"
-          value={distance}
-          onChange={(e) => setDistance(parseFloat(e.target.value))}
-        />
-      </label>
-      <br />
-      <label>
-        Accuracy (in miles):
-        <input
-          type="number"
-          value={accuracy}
-          onChange={(e) => setAccuracy(parseFloat(e.target.value))}
+          type="checkbox"
+          checked={setUpParameters}
+          onChange={(e) => setSetUpParameters(e.target.checked)}
         />
       </label>
 
-      {engageEmergencyContact && (
+      {setUpParameters && (
         <div>
+          <h3>Tracking Parameters</h3>
           <label>
-            Notify emergency contact if the parameters are left?
+            Distance (in miles):
             <input
-              type="checkbox"
-              checked={notifyEmergencyContact}
-              onChange={(e) => setNotifyEmergencyContact(e.target.checked)}
+              type="number"
+              value={distance}
+              onChange={(e) => setDistance(parseFloat(e.target.value))}
             />
           </label>
+          <br />
+          <label>
+            Accuracy (in miles):
+            <input
+              type="number"
+              value={accuracy}
+              onChange={(e) => setAccuracy(parseFloat(e.target.value))}
+            />
+          </label>
+
+          <br />
+          
+          <label>
+            Engage an emergency contact if the parameters are left?
+            <input
+              type="checkbox"
+              checked={engageEmergencyContact}
+              onChange={(e) => setEngageEmergencyContact(e.target.checked)}
+            />
+          </label>
+
+
+          {engageEmergencyContact && (
+            <div>
+              <h3>Emergency Contact Name</h3>
+              <input
+                type="text"
+                value={emergencyContactName}
+                onChange={(e) => setEmergencyContactName(e.target.value)}
+              />
+            </div>
+          )}
         </div>
       )}
-
-      {engageEmergencyContact && (
-        <div>
-          <h3>Emergency Contact Name</h3>
-          <input
-            type="text"
-            value={emergencyContactName}
-            onChange={(e) => setEmergencyContactName(e.target.value)}
-          />
-        </div>
-      )}
-
-
     </div>
   );
 };
