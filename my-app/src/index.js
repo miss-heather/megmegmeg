@@ -356,7 +356,7 @@ const OnlineDatePage = () => {
         </div>
       )}
       <br/>
-      <h3>Where are you headed?</h3>
+              <h3>Where are you headed?</h3>
       <label htmlFor="destinationAddress">Destination Address:</label>
       <input type="text" id="destinationAddress" value={destinationAddress} onChange={handleDestinationAddressChange} />
       <br/>
@@ -388,77 +388,6 @@ const OnlineDatePage = () => {
 };
 export default OnlineDatePage;
 
-const WalkPage = () => {
-  const [isWalkingWithSomeone, setIsWalkingWithSomeone] = useState(false);
-  const [walkingWithName, setWalkingWithName] = useState('');
-  const [uniqueFeatures, setUniqueFeatures] = useState('');
-  const [imageFile, setImageFile] = useState(null);
-
-  const handleImageUpload = (event) => {
-    const file = event.target.files[0];
-    setImageFile(file);
-  };
-
-  return (
-    <div>
-      <h3>Campus? Military Base?
-        <br/>
-        Just feel like takin' a stroll?
-      </h3>
-      <label>
-        Are you walking with someone?
-        <input
-          type="checkbox"
-          checked={isWalkingWithSomeone}
-          onChange={(e) => setIsWalkingWithSomeone(e.target.checked)}
-        />
-      </label>
-      <br />
-      {isWalkingWithSomeone && (
-        <div>
-          <label>
-            Walking with:
-            <input
-              type="text"
-              value={walkingWithName}
-              onChange={(e) => setWalkingWithName(e.target.value)}
-            />
-          </label>
-          <br />
-          <label>
-            Unique features:
-            <textarea
-              value={uniqueFeatures}
-              onChange={(e) => setUniqueFeatures(e.target.value)}
-            />
-          </label>
-        </div>
-      )}
-      <br />
-      <label>
-        Upload an image:
-        <input type="file" onChange={handleImageUpload} />
-      </label>
-      <br />
-      <div>
-        {/* <h4>Summary:</h4>
-        <p>Walking with someone: {isWalkingWithSomeone ? 'Yes' : 'No'}</p> */}
-        {/* {isWalkingWithSomeone && (
-          <div>
-            <p>Walking with: {walkingWithName}</p>
-            <p>Unique features: {uniqueFeatures}</p>
-          </div> */}
-        
-        {imageFile && (
-          <div>
-            <p>Image:</p>
-            <img src={URL.createObjectURL(imageFile)} alt="Uploaded" />
-          </div>
-        )}
-      </div>
-    </div>
-  );
-};
 
 const WalkedPage = () => {
   const [isWalkingWithSomeone, setIsWalkingWithSomeone] = useState(false);
@@ -466,7 +395,8 @@ const WalkedPage = () => {
   const [uniqueFeatures, setUniqueFeatures] = useState('');
   const [imageFile, setImageFile] = useState(null);
   const [enableGPS, setEnableGPS] = useState(false);
-  
+  const [sendWalkingBuddyInfo, setSendWalkingBuddyInfo] = useState(false);
+  const [emergencyContact, setEmergencyContact] = useState('');
 
   const handleImageUpload = (event) => {
     const file = event.target.files[0];
@@ -512,11 +442,32 @@ const WalkedPage = () => {
           </label>
         </div>
       )}
-      <br />
       <label>
         Upload an image:
         <input type="file" onChange={handleImageUpload} />
       </label>
+      <br />
+      <br/>
+      <label>
+        Send walking buddy's info to emergency contact?
+        <input
+          type="checkbox"
+          checked={sendWalkingBuddyInfo}
+          onChange={(e) => setSendWalkingBuddyInfo(e.target.checked)}
+        />
+      </label>
+      {sendWalkingBuddyInfo && (
+        <div>
+          <label>
+            Emergency Contact:
+            <input
+              type="text"
+              value={emergencyContact}
+              onChange={(e) => setEmergencyContact(e.target.value)}
+            />
+          </label>
+        </div>
+      )}
       <br />
       <label>
         Enable GPS to track your walk:
@@ -545,6 +496,7 @@ const WalkedPage = () => {
     </div>
   );
 };
+
 
 export { WalkedPage };
 
