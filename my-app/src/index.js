@@ -346,7 +346,17 @@ const OnlineDatePage = () => {
           ))}
         </div>
       )}
+            <label htmlFor="sendToEmergencyContact">Would you like to send your date's info to your emergency Contact</label>
+      <input type="checkbox" id="sendToEmergencyContact" checked={notifyEmergencyContact} onChange={handleNotifyEmergencyContactChange} />
 
+      {notifyEmergencyContact && (
+        <div>
+          <label htmlFor="emergencyContact">Emergency Contact:</label>
+          <input type="text" id="emergencyContact" value={emergencyContact} onChange={handleEmergencyContactChange} />
+        </div>
+      )}
+      <br/>
+      <h3>Where are you headed?</h3>
       <label htmlFor="destinationAddress">Destination Address:</label>
       <input type="text" id="destinationAddress" value={destinationAddress} onChange={handleDestinationAddressChange} />
       <br/>
@@ -449,6 +459,7 @@ const WalkPage = () => {
     </div>
   );
 };
+
 const WalkedPage = () => {
   const [isWalkingWithSomeone, setIsWalkingWithSomeone] = useState(false);
   const [walkingWithName, setWalkingWithName] = useState('');
