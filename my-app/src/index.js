@@ -15,6 +15,8 @@ import LiveLocation from './LiveLocation';
 import PanicFeatures from './PanicFeatures';
 import SignUp from './SignUp';
 import SignIn from './SignIn';
+import halo from './images/halo.png';
+import megtext from './images/meg-text-crop.png';
 
 
 const Navigation = () => {
@@ -23,48 +25,51 @@ const Navigation = () => {
 
   return (
     <nav>
-      <nav className="custom-header">
-      <div className="header">
-        <h1>MeG ~ My eGuardian</h1>
-        <div className="actions">
-          <p className="login-here">Login Here</p>
-          <Link to="/signup">Sign Up/Login</Link>
+      <div className="custom-header">
+        <div className="header">
+          <div className="login-box">
+            <p className="login-here" class="outlined-text">Login Here:</p>
+            <Link to="/signup" class="link-class">Sign Up/Login</Link>
+          </div>
+        </div>
+        <div className="image-container">
+          <img src={halo} alt="MeG ~ My eGuardian" className="halo" />
+          <img src={megtext} alt="MeG ~ My eGuardian" className="meg-text" />
+        </div>
+        <div className="main-card">
+          <h3>Navigation</h3>
+          <ul>
+            {location.pathname !== '/' && (
+              <li>
+                <Link to="/" className={!isHomePage ? 'active' : ''}>
+                  Home
+                </Link>
+              </li>
+            )}
+            {location.pathname !== '/emergency-contacts' && (
+              <li>
+                <Link to="/emergency-contacts" className={location.pathname === '/emergency-contacts' ? 'active' : ''}>
+                  Emergency Contacts
+                </Link>
+              </li>
+            )}
+            {location.pathname !== '/gps' && (
+              <li>
+                <Link to="/gps" className={location.pathname === '/gps' ? 'active' : ''}>
+                  Update or Activate GPS
+                </Link>
+              </li>
+            )}
+            {location.pathname !== '/panic-features' && (
+              <li>
+                <Link to="/panic-features" className={location.pathname === '/panic-features' ? 'active' : ''}>
+                  Panic Button!
+                </Link>
+              </li>
+            )}
+          </ul>
         </div>
       </div>
-      <div className="main-card">
-        <h3>Navigation</h3>
-        <ul>
-          {location.pathname !== '/' && (
-            <li>
-              <Link to="/" className={!isHomePage ? 'active' : ''}>
-                Home
-              </Link>
-            </li>
-          )}
-          {location.pathname !== '/emergency-contacts' && (
-            <li>
-              <Link to="/emergency-contacts" className={location.pathname === '/emergency-contacts' ? 'active' : ''}>
-                Emergency Contacts
-              </Link>
-            </li>
-          )}
-          {location.pathname !== '/gps' && (
-            <li>
-              <Link to="/gps" className={location.pathname === '/gps' ? 'active' : ''}>
-                Update or Activate GPS
-              </Link>
-            </li>
-          )}
-          {location.pathname !== '/panic-features' && (
-            <li>
-              <Link to="/panic-features" className={location.pathname === '/panic-features' ? 'active' : ''}>
-                Panic Button!
-              </Link>
-            </li>
-          )}
-        </ul>
-      </div>
-      </nav>
       {(isHomePage || location.pathname === '/') && (
         <div className="diary-card">
           <h3>Meg's Diary</h3>
@@ -90,6 +95,7 @@ const Navigation = () => {
   );
 };
 
+
 const RidesharePage = () => {
   const [sendToEmergencyContact, setSendToEmergencyContact] = useState(false);
   const [emergencyContact, setEmergencyContact] = useState('');
@@ -99,6 +105,9 @@ const RidesharePage = () => {
   const [setupLocationParameters, setSetupLocationParameters] = useState(false);
   const [notifyEmergencyContact, setNotifyEmergencyContact] = useState(false);
   const [emergencyContactInfo, setEmergencyContactInfo] = useState('');
+  const initialValue = 'Some initial value';
+  const [myState, setMyState] = useState(initialValue);
+
 
   const handleImageUpload = (event) => {
     const files = event.target.files;
@@ -170,7 +179,7 @@ const RidesharePage = () => {
 
       <div>
         <label htmlFor="sendToEmergencyContact">
-          Send Rideshare Data to Emergency Contact:
+          Send Rideshare Data to Emergency Contact?
           <input
             type="checkbox"
             id="sendToEmergencyContact"
@@ -186,7 +195,9 @@ const RidesharePage = () => {
           <input type="text" id="emergencyContact" value={emergencyContact} onChange={handleEmergencyContactChange} />
         </div>
       )}
-
+      <br/>
+      <div>
+        <h3>Where are you headed?</h3>
       <label htmlFor="destinationAddress">Destination Address:</label>
       <input
         type="text"
@@ -194,10 +205,11 @@ const RidesharePage = () => {
         value={destinationAddress}
         onChange={handleDestinationAddressChange}
       />
+      </div>
 
       <div>
         <label htmlFor="setupLocationParameters">
-          Set up Location Parameters for Safe Arrival:
+          Set up Location Parameters for Safe Arrival?
           <input type="checkbox" id="setupLocationParameters" onChange={handleSetupLocationParametersChange} />
         </label>
       </div>
@@ -216,7 +228,7 @@ const RidesharePage = () => {
 
           <div>
             <label htmlFor="notifyEmergencyContact">
-              Notify Emergency Contact on Safe Arrival:
+              Notify Emergency Contact upon Safe Arrival:
               <input
                 type="checkbox"
                 id="notifyEmergencyContact"
@@ -228,7 +240,7 @@ const RidesharePage = () => {
 
           {notifyEmergencyContact && (
             <div>
-              <label htmlFor="emergencyContactInfo">Emergency Contact Info:</label>
+              <label htmlFor="emergencyContactInfo">Personalize "home safe" text here:</label>
               <textarea
                 id="emergencyContactInfo"
                 value={emergencyContactInfo}

@@ -35,6 +35,25 @@ const LiveLocation = ({ emergencyContacts }) => {
     return () => clearInterval(interval);
   }, []);
 
+  const handleCheckboxChange = (e) => {
+    setSetUpParameters(e.target.checked);
+  };
+
+  const handleDistanceChange = (e) => {
+    setDistance(parseFloat(e.target.value));
+  };
+
+  const handleAccuracyChange = (e) => {
+    setAccuracy(parseFloat(e.target.value));
+  };
+
+  const handleEmergencyContactCheckboxChange = (e) => {
+    setEngageEmergencyContact(e.target.checked);
+  };
+
+  const handleEmergencyContactNameChange = (e) => {
+    setEmergencyContactName(e.target.value);
+  };
 
   return (
     <div>
@@ -54,7 +73,7 @@ const LiveLocation = ({ emergencyContacts }) => {
         <input
           type="checkbox"
           checked={setUpParameters}
-          onChange={(e) => setSetUpParameters(e.target.checked)}
+          onChange={handleCheckboxChange}
         />
       </label>
 
@@ -66,7 +85,7 @@ const LiveLocation = ({ emergencyContacts }) => {
             <input
               type="number"
               value={distance}
-              onChange={(e) => setDistance(parseFloat(e.target.value))}
+              onChange={handleDistanceChange}
             />
           </label>
           <br />
@@ -75,21 +94,18 @@ const LiveLocation = ({ emergencyContacts }) => {
             <input
               type="number"
               value={accuracy}
-              onChange={(e) => setAccuracy(parseFloat(e.target.value))}
+              onChange={handleAccuracyChange}
             />
           </label>
-
           <br />
-          
           <label>
             Engage an emergency contact if the parameters are left?
             <input
               type="checkbox"
               checked={engageEmergencyContact}
-              onChange={(e) => setEngageEmergencyContact(e.target.checked)}
+              onChange={handleEmergencyContactCheckboxChange}
             />
           </label>
-
 
           {engageEmergencyContact && (
             <div>
@@ -97,14 +113,14 @@ const LiveLocation = ({ emergencyContacts }) => {
               <input
                 type="text"
                 value={emergencyContactName}
-                onChange={(e) => setEmergencyContactName(e.target.value)}
+                onChange={handleEmergencyContactNameChange}
               />
             </div>
           )}
         </div>
       )}
 
-    <Footer />
+      <Footer />
     </div>
   );
 };
