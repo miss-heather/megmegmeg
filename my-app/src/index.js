@@ -321,7 +321,7 @@ const OnlineDatePage = () => {
       <br/>
       {images.length > 0 && (
         <div>
-          <h4>Uploaded App Images:</h4>
+          <h4>Upload App Images:</h4>
           {images.map((image, index) => (
             <div key={index}>
               <img src={URL.createObjectURL(image)} alt={`Uploaded ${index + 1}`} />
@@ -519,6 +519,222 @@ const WalkedPage = () => {
 
 export { WalkedPage };
 
+
+
+const NewClientPage = () => {
+  const [clientName, setClientName] = useState('');
+  const [uniqueFeatures, setUniqueFeatures] = useState('');
+  const [itinerary, setItinerary] = useState('');
+  const [imageFile, setImageFile] = useState(null);
+  const [enableGPS, setEnableGPS] = useState(false);
+  const [setParameters, setSetParameters] = useState(false);
+  const [address, setAddress] = useState('');
+  const [radius, setRadius] = useState('');
+  const [contactOnLeave, setContactOnLeave] = useState(false);
+  const [emergencyContact, setEmergencyContact] = useState('');
+  const [emergencyName, setEmergencyName] = useState('');
+  const [emergencyPhone, setEmergencyPhone] = useState('');
+  const [engagementTime, setEngagementTime] = useState('');
+
+  const handleClientNameChange = (event) => {
+    setClientName(event.target.value);
+  };
+
+  const handleUniqueFeaturesChange = (event) => {
+    setUniqueFeatures(event.target.value);
+  };
+
+  const handleItineraryChange = (event) => {
+    setItinerary(event.target.value);
+  };
+
+  const handleImageUpload = (event) => {
+    const file = event.target.files[0];
+    setImageFile(file);
+  };
+
+  const handleEnableGPSChange = (event) => {
+    const isChecked = event.target.checked;
+    setEnableGPS(isChecked);
+    // Reset parameters if GPS is unchecked
+    if (!isChecked) {
+      setSetParameters(false);
+      setAddress('');
+      setRadius('');
+      setContactOnLeave(false);
+    }
+  };
+
+  const handleSetParametersChange = (event) => {
+    setSetParameters(event.target.checked);
+  };
+
+  const handleAddressChange = (event) => {
+    setAddress(event.target.value);
+  };
+
+  const handleRadiusChange = (event) => {
+    setRadius(event.target.value);
+  };
+
+  const handleContactOnLeaveChange = (event) => {
+    setContactOnLeave(event.target.checked);
+  };
+
+  const handleEmergencyContactChange = (event) => {
+    setEmergencyContact(event.target.value);
+  };
+
+  const handleEmergencyNameChange = (event) => {
+    setEmergencyName(event.target.value);
+  };
+
+  const handleEmergencyPhoneChange = (event) => {
+    setEmergencyPhone(event.target.value);
+  };
+
+  const handleEngagementTimeChange = (event) => {
+    setEngagementTime(event.target.value);
+  };
+
+  return (
+    <div>
+      <h2>With a Client?</h2>
+      <label>
+        Client Name:
+        <br />
+        <input type="text" value={clientName} onChange={handleClientNameChange} />
+      </label>
+      <br />
+      <label>
+        Unique identifiable features/tattoos:
+        <br />
+        <textarea value={uniqueFeatures} onChange={handleUniqueFeaturesChange} />
+      </label>
+      <br />
+      <label>
+        Image:
+        <br />
+        <input type="file" onChange={handleImageUpload} />
+      </label>
+      {imageFile && (
+        <div>
+          <img src={URL.createObjectURL(imageFile)} alt="Uploaded" />
+        </div>
+      )}
+      <br/>
+      <br/>
+      <label>
+        Itinerary Timeline:
+        <br />
+        <textarea value={itinerary} onChange={handleItineraryChange} />
+      </label>
+      <br />
+      <br/>
+      <label>
+        Enable GPS:
+        <input
+          type="checkbox"
+          checked={enableGPS}
+          onChange={handleEnableGPSChange}
+        />
+      </label>
+      {enableGPS && (
+        <div>
+          <label>
+            Set GPS Parameters around final destination?
+            <input
+              type="checkbox"
+              checked={setParameters}
+              onChange={handleSetParametersChange}
+            />
+          </label>
+          <br/>
+          <br/>
+          {setParameters && (
+            <div>
+              <label>
+                Destination Address:
+                <br />
+                <input type="text" value={address} onChange={handleAddressChange} />
+              </label>
+              <br />
+              <br />
+              <label>
+                Radius (in miles):
+                <br />
+                <input type="number" value={radius} onChange={handleRadiusChange} />
+              </label>
+              <br />
+              <br />
+              <label>
+                If Parameters are left, or are not reached by
+                <input
+                  type="time"
+                  value={engagementTime}
+                  onChange={handleEngagementTimeChange}
+                />
+              </label>
+              <label>
+                , engage Emergency Contact:
+                <input
+                  type="checkbox"
+                  checked={contactOnLeave}
+                  onChange={handleContactOnLeaveChange}
+                />
+              </label>
+              {contactOnLeave && (
+                <div>
+                  <label>
+                    Emergency Contact:
+                    <br />
+                    <input
+                      type="text"
+                      value={emergencyContact}
+                      onChange={handleEmergencyContactChange}
+                    />
+                  </label>
+                </div>
+              )}
+            </div>
+          )}
+        </div>
+      )}
+      <br />
+      {enableGPS && (
+        <div>
+          {emergencyContact && (
+            <div>
+              <label>
+                Emergency Contact Name:
+                <br />
+                <input
+                  type="text"
+                  value={emergencyName}
+                  onChange={handleEmergencyNameChange}
+                />
+              </label>
+              <br />
+              <label>
+                Emergency Contact Phone:
+                <br />
+                <input
+                  type="text"
+                  value={emergencyPhone}
+                  onChange={handleEmergencyPhoneChange}
+                />
+              </label>
+            </div>
+          )}
+        </div>
+      )}
+      <br />
+    </div>
+  );
+};
+
+// export default NewClientPage;
+
 const App = () => {
   return (
     <Router>
@@ -535,7 +751,7 @@ const App = () => {
             <Route path="/rideshare" element={<RidesharePage />} />
             <Route path="/onlineDate" element={<OnlineDatePage />} />
             <Route path="/walk" element={<WalkedPage />} />
-            <Route path="/client" element={<h3>Client</h3>} />
+            <Route path="/client" element={<NewClientPage />} />
           </Routes>
         </div>
       </EmergencyContactsProvider>
