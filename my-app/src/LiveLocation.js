@@ -1,4 +1,6 @@
 import React, { useState, useEffect } from 'react';
+import Footer from './Footer';
+import './css/Footer.css';
 
 const LiveLocation = ({ emergencyContacts }) => {
   const [latitude, setLatitude] = useState(null);
@@ -101,6 +103,8 @@ const LiveLocation = ({ emergencyContacts }) => {
           )}
         </div>
       )}
+
+    <Footer />
     </div>
   );
 };

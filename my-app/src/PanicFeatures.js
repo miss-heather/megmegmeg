@@ -1,5 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import './css/panic.css';
+import './css/Footer.css';
+import Footer from './Footer';
+
 
 const PanicFeatures = () => {
   const [timer, setTimer] = useState(5);
@@ -59,6 +62,7 @@ const PanicFeatures = () => {
         )}
       </button>
       {calling911 && <p>Calling 911...</p>}
+      <Footer />
     </div>
   );
 };

@@ -5,14 +5,17 @@ import { EmergencyContactsProvider } from './EmergencyContactsContext';
 import './css/emergencyContacts.css';
 import './css/Diary.css';
 import './css/Rideshare.css';
-import './css/WalkPage.css'
+import './css/WalkPage.css';
+import './css/Footer.css';
 // import './css/panic.css'
+
 import Home from './Home';
 import EmergencyContacts from './EmergencyContacts';
 import LiveLocation from './LiveLocation';
 import PanicFeatures from './PanicFeatures';
 import SignUp from './SignUp';
 import SignIn from './SignIn';
+
 
 const Navigation = () => {
   const location = useLocation();
@@ -65,14 +68,14 @@ const Navigation = () => {
           <h3>Meg's Diary</h3>
           <ul>
             <li>
-              <Link to="/rideshare">Take a Rideshare?</Link>
+              <Link to="/rideshare">Taking a Rideshare?</Link>
             </li>
             <li>
-              <Link to="/onlineDate">Online Date?</Link>
+              <Link to="/onlineDate">Have a Hot Date?</Link>
             </li>
             <li>
               <Link to="/walk">
-                Campus or Base? <br /> Just go for a walk?
+                Campus or Base? <br /> Just goin' for a walk?
               </Link>
             </li>
             <li>
@@ -438,6 +441,7 @@ const WalkedPage = () => {
   const [uniqueFeatures, setUniqueFeatures] = useState('');
   const [imageFile, setImageFile] = useState(null);
   const [enableGPS, setEnableGPS] = useState(false);
+  
 
   const handleImageUpload = (event) => {
     const file = event.target.files[0];
@@ -734,6 +738,16 @@ const NewClientPage = () => {
 };
 
 // export default NewClientPage;
+const Footer = () => {
+  return (
+    <footer className='footer-foot'>
+      <p>Questions? Comments? Concerns?
+        <br/><a href="mailto: email@email.com">eMail Us</a> || Call Us: 206-666-0666
+        <br/>
+        Visit Us Online: Twitter || Facebook || TikTok</p>
+    </footer>
+  );
+};
 
 const App = () => {
   return (
@@ -753,6 +767,7 @@ const App = () => {
             <Route path="/walk" element={<WalkedPage />} />
             <Route path="/client" element={<NewClientPage />} />
           </Routes>
+          <Footer />
         </div>
       </EmergencyContactsProvider>
     </Router>

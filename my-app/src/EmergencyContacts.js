@@ -1,9 +1,10 @@
 import React, { useState, useContext } from 'react';
 import { EmergencyContactsContext } from './EmergencyContactsContext';
 import './css/emergencyContacts.css';
+import Footer from './Footer';
 
 const EmergencyContacts = () => {
-  const { contacts, setContacts } = useContext(EmergencyContactsContext);
+  const { contacts, setContacts, calling911 } = useContext(EmergencyContactsContext);
 
   const [name, setName] = useState('');
   const [phoneNumber, setPhoneNumber] = useState('');
@@ -31,6 +32,9 @@ const EmergencyContacts = () => {
   return (
     <div>
       <h2>Emergency Contacts</h2>
+      <p className={`calling-911 ${calling911 ? 'visible' : ''}`}>
+        Calling 911...
+      </p>
       <form onSubmit={handleSubmit}>
         <label htmlFor="name">Name:</label>
         <input
@@ -81,6 +85,7 @@ const EmergencyContacts = () => {
           ))}
         </ul>
       )}
+      <Footer />
     </div>
   );
 };
