@@ -1,5 +1,10 @@
-.header {
-    position: relative;
+.custom-header {
+    /* position: relative; */
+    background-color: #6aa7d6a9;
+  }
+  
+.login-here {
+    margin-bottom: 0%;
   }
   
   /* .actions {

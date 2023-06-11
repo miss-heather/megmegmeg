@@ -7,8 +7,8 @@ import './css/Diary.css';
 import './css/Rideshare.css';
 import './css/WalkPage.css';
 import './css/Footer.css';
+import './css/Header.css';
 // import './css/panic.css'
-
 import Home from './Home';
 import EmergencyContacts from './EmergencyContacts';
 import LiveLocation from './LiveLocation';
@@ -23,10 +23,11 @@ const Navigation = () => {
 
   return (
     <nav>
+      <nav className="custom-header">
       <div className="header">
         <h1>MeG ~ My eGuardian</h1>
         <div className="actions">
-          <p className="new-here">Login Here</p>
+          <p className="login-here">Login Here</p>
           <Link to="/signup">Sign Up/Login</Link>
         </div>
       </div>
@@ -63,6 +64,7 @@ const Navigation = () => {
           )}
         </ul>
       </div>
+      </nav>
       {(isHomePage || location.pathname === '/') && (
         <div className="diary-card">
           <h3>Meg's Diary</h3>
