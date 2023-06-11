@@ -298,15 +298,15 @@ const OnlineDatePage = () => {
   return (
     <div className="online-date-page">
       <h3>Online Dating? Who is this person?</h3>
-          <br/>
-      <label htmlFor="name">Name:</label>
+
+      <label htmlFor="name">Name they provided:</label>
       <input type="text" id="name" value={name} onChange={handleNameChange} />
       <br/>
-      <label htmlFor="userName">User Name:</label>
-      <input type="text" id="userName" value={userName} onChange={handleUserNameChange} />
-      <br/>
-      <label htmlFor="appFoundOn">App found on:</label>
+      <label htmlFor="appFoundOn">Which app were they found on?</label>
       <input type="text" id="appFoundOn" value={appFoundOn} onChange={handleAppFoundOnChange} />
+      <br/>
+      <label htmlFor="userName">What's this winner's User Name?</label>
+      <input type="text" id="userName" value={userName} onChange={handleUserNameChange} />
       <br/>
       <label htmlFor="licensePlate">License Plate #:</label>
       <input type="text" id="licensePlate" value={licensePlate} onChange={handleLicensePlateChange} />
@@ -319,7 +319,7 @@ const OnlineDatePage = () => {
       <br/>
       {images.length > 0 && (
         <div>
-          <h4>Uploaded Images:</h4>
+          <h4>Uploaded App Images:</h4>
           {images.map((image, index) => (
             <div key={index}>
               <img src={URL.createObjectURL(image)} alt={`Uploaded Image ${index + 1}`} />
@@ -331,7 +331,7 @@ const OnlineDatePage = () => {
       <label htmlFor="destinationAddress">Destination Address:</label>
       <input type="text" id="destinationAddress" value={destinationAddress} onChange={handleDestinationAddressChange} />
       <br/>
-      <label htmlFor="setRadiusParameter">Set Radius Parameter:</label>
+      <label htmlFor="setRadiusParameter">Set Radius Parameter?:</label>
       <input type="checkbox" id="setRadiusParameter" checked={setRadiusParameter} onChange={handleSetRadiusParameterChange} />
 
       {setRadiusParameter && (
@@ -343,7 +343,7 @@ const OnlineDatePage = () => {
 
       {setRadiusParameter && (
         <div>
-          <label htmlFor="notifyEmergencyContact">Notify Emergency Contact:</label>
+          <label htmlFor="notifyEmergencyContact">Notify Emergency Contact if parameters are breached?</label>
           <input type="checkbox" id="notifyEmergencyContact" checked={notifyEmergencyContact} onChange={handleNotifyEmergencyContactChange} />
         </div>
       )}
