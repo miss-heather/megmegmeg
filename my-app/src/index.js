@@ -66,7 +66,7 @@ const Navigation = () => {
               <Link to="/rideshare">Take a Rideshare?</Link>
             </li>
             <li>
-              <Link to="onlineDate">Online Date?</Link>
+              <Link to="/onlineDate">Online Date?</Link>
             </li>
             <li>
               <Link to="/walk">
@@ -132,23 +132,23 @@ const RidesharePage = () => {
       <h3>Ridesharing?</h3>
 
       <label htmlFor="name">Name:</label>
-      <input type="text" id="name" />
-        <br/>
+      <input type="text" id="name" required />
+      <br />
       <label htmlFor="username">User Name:</label>
-      <input type="text" id="username" />
-        <br/>
+      <input type="text" id="username" required />
+      <br />
       <label htmlFor="license">License Plate #:</label>
-      <input type="text" id="license" />
-        <br/>
+      <input type="text" id="license" required />
+      <br />
       <label htmlFor="color">Color:</label>
-      <input type="text" id="color" />
-        <br/>
+      <input type="text" id="color" required />
+      <br />
       <label htmlFor="yearMakeModel">Year/Make/Model:</label>
-      <input type="text" id="yearMakeModel" />
-        <br/>
+      <input type="text" id="yearMakeModel" required />
+      <br />
       <label htmlFor="images">Upload Images:</label>
       <input type="file" id="images" accept="image/*" multiple onChange={handleImageUpload} />
-        <br/>
+      <br />
 
       {images.length > 0 && (
         <div>
@@ -181,7 +181,12 @@ const RidesharePage = () => {
       )}
 
       <label htmlFor="destinationAddress">Destination Address:</label>
-      <input type="text" id="destinationAddress" value={destinationAddress} onChange={handleDestinationAddressChange} />
+      <input
+        type="text"
+        id="destinationAddress"
+        value={destinationAddress}
+        onChange={handleDestinationAddressChange}
+      />
 
       <div>
         <label htmlFor="setupLocationParameters">
@@ -198,13 +203,13 @@ const RidesharePage = () => {
             id="parameterRadius"
             value={parameterRadius}
             onChange={handleParameterRadiusChange}
-            step="0.1"
+            step="0.01"
             min="0"
           />
 
           <div>
             <label htmlFor="notifyEmergencyContact">
-              Notify Emergency Contact if Destination is not Reached:
+              Notify Emergency Contact on Safe Arrival:
               <input
                 type="checkbox"
                 id="notifyEmergencyContact"
@@ -217,52 +222,167 @@ const RidesharePage = () => {
           {notifyEmergencyContact && (
             <div>
               <label htmlFor="emergencyContactInfo">Emergency Contact Info:</label>
-              <input
-                type="text"
+              <textarea
                 id="emergencyContactInfo"
                 value={emergencyContactInfo}
                 onChange={handleEmergencyContactInfoChange}
-              />
+              ></textarea>
             </div>
           )}
         </>
       )}
 
-      {!setupLocationParameters && (
-        <div style={{ display: 'none' }}>
-          <label htmlFor="parameterRadius">Parameter Radius (in miles):</label>
-          <input type="number" id="parameterRadius" value={parameterRadius} onChange={handleParameterRadiusChange} />
+      <button type="submit">Submit</button>
+    </div>
+  );
+};
+
+const OnlineDatePage = () => {
+  const [name, setName] = useState('');
+  const [userName, setUserName] = useState('');
+  const [appFoundOn, setAppFoundOn] = useState('');
+  const [licensePlate, setLicensePlate] = useState('');
+  const [yearMakeModel, setYearMakeModel] = useState('');
+  const [images, setImages] = useState([]);
+  const [destinationAddress, setDestinationAddress] = useState('');
+  const [setRadiusParameter, setSetRadiusParameter] = useState(false);
+  const [radius, setRadius] = useState(0);
+  const [notifyEmergencyContact, setNotifyEmergencyContact] = useState(false);
+  const [emergencyContact, setEmergencyContact] = useState('');
+
+  const handleNameChange = (event) => {
+    setName(event.target.value);
+  };
+
+  const handleUserNameChange = (event) => {
+    setUserName(event.target.value);
+  };
+
+  const handleAppFoundOnChange = (event) => {
+    setAppFoundOn(event.target.value);
+  };
+
+  const handleLicensePlateChange = (event) => {
+    setLicensePlate(event.target.value);
+  };
+
+  const handleYearMakeModelChange = (event) => {
+    setYearMakeModel(event.target.value);
+  };
+
+  const handleImageUpload = (event) => {
+    const files = event.target.files;
+    setImages(Array.from(files));
+  };
+
+  const handleDestinationAddressChange = (event) => {
+    setDestinationAddress(event.target.value);
+  };
+
+  const handleSetRadiusParameterChange = (event) => {
+    setSetRadiusParameter(event.target.checked);
+  };
+
+  const handleRadiusChange = (event) => {
+    setRadius(parseInt(event.target.value, 10));
+  };
+
+  const handleNotifyEmergencyContactChange = (event) => {
+    setNotifyEmergencyContact(event.target.checked);
+  };
+
+  const handleEmergencyContactChange = (event) => {
+    setEmergencyContact(event.target.value);
+  };
+
+  return (
+    <div className="online-date-page">
+      <h3>Online Dating? Who is this person?</h3>
+          <br/>
+      <label htmlFor="name">Name:</label>
+      <input type="text" id="name" value={name} onChange={handleNameChange} />
+      <br/>
+      <label htmlFor="userName">User Name:</label>
+      <input type="text" id="userName" value={userName} onChange={handleUserNameChange} />
+      <br/>
+      <label htmlFor="appFoundOn">App found on:</label>
+      <input type="text" id="appFoundOn" value={appFoundOn} onChange={handleAppFoundOnChange} />
+      <br/>
+      <label htmlFor="licensePlate">License Plate #:</label>
+      <input type="text" id="licensePlate" value={licensePlate} onChange={handleLicensePlateChange} />
+      <br/>
+      <label htmlFor="yearMakeModel">Year/Make/Model:</label>
+      <input type="text" id="yearMakeModel" value={yearMakeModel} onChange={handleYearMakeModelChange} />
+      <br/>
+      <label htmlFor="images">Upload Images:</label>
+      <input type="file" id="images" accept="image/*" multiple onChange={handleImageUpload} />
+      <br/>
+      {images.length > 0 && (
+        <div>
+          <h4>Uploaded Images:</h4>
+          {images.map((image, index) => (
+            <div key={index}>
+              <img src={URL.createObjectURL(image)} alt={`Uploaded Image ${index + 1}`} />
+            </div>
+          ))}
+        </div>
+      )}
+
+      <label htmlFor="destinationAddress">Destination Address:</label>
+      <input type="text" id="destinationAddress" value={destinationAddress} onChange={handleDestinationAddressChange} />
+      <br/>
+      <label htmlFor="setRadiusParameter">Set Radius Parameter:</label>
+      <input type="checkbox" id="setRadiusParameter" checked={setRadiusParameter} onChange={handleSetRadiusParameterChange} />
+
+      {setRadiusParameter && (
+        <div>
+          <label htmlFor="radius">Radius (in miles):</label>
+          <input type="number" id="radius" value={radius} onChange={handleRadiusChange} />
+        </div>
+      )}
+
+      {setRadiusParameter && (
+        <div>
+          <label htmlFor="notifyEmergencyContact">Notify Emergency Contact:</label>
+          <input type="checkbox" id="notifyEmergencyContact" checked={notifyEmergencyContact} onChange={handleNotifyEmergencyContactChange} />
+        </div>
+      )}
+
+      {notifyEmergencyContact && (
+        <div>
+          <label htmlFor="emergencyContact">Emergency Contact:</label>
+          <input type="text" id="emergencyContact" value={emergencyContact} onChange={handleEmergencyContactChange} />
         </div>
       )}
     </div>
   );
 };
 
-const Root = () => {
+export default OnlineDatePage;
+
+
+const App = () => {
   return (
     <Router>
-      <div>
-        <Navigation />
-
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/emergency-contacts" element={<EmergencyContacts />} />
-          <Route path="/gps" element={<LiveLocation />} />
-          <Route path="/panic-features" element={<PanicFeatures />} />
-          <Route path="/signup" element={<SignUp />} />
-          <Route path="/login" element={<SignIn />} />
-          <Route path="/rideshare" element={<RidesharePage />} />
-        </Routes>
-      </div>
+      <EmergencyContactsProvider>
+        <div className="App">
+          <Navigation />
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/signup" element={<SignUp />} />
+            <Route path="/signin" element={<SignIn />} />
+            <Route path="/emergency-contacts" element={<EmergencyContacts />} />
+            <Route path="/gps" element={<LiveLocation />} />
+            <Route path="/panic-features" element={<PanicFeatures />} />
+            <Route path="/rideshare" element={<RidesharePage />} />
+            <Route path="/onlineDate" element={<OnlineDatePage />} />
+            <Route path="/walk" element={<h3>Just go for a walk</h3>} />
+            <Route path="/client" element={<h3>Entertaining a Client</h3>} />
+          </Routes>
+        </div>
+      </EmergencyContactsProvider>
     </Router>
   );
 };
 
-ReactDOM.render(
-  <React.StrictMode>
-    <EmergencyContactsProvider>
-      <Root />
-    </EmergencyContactsProvider>
-  </React.StrictMode>,
-  document.getElementById('root')
-);
+ReactDOM.render(<App />, document.getElementById('root'));
