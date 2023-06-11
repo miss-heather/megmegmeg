@@ -374,10 +374,10 @@ const WalkPage = () => {
 
   return (
     <div>
-      <h2>Campus? Military Base?
+      <h3>Campus? Military Base?
         <br/>
-        Just feel like a stroll?
-      </h2>
+        Just feel like takin' a stroll?
+      </h3>
       <label>
         Are you walking with someone?
         <input
@@ -432,7 +432,92 @@ const WalkPage = () => {
     </div>
   );
 };
-export { WalkPage };
+const WalkedPage = () => {
+  const [isWalkingWithSomeone, setIsWalkingWithSomeone] = useState(false);
+  const [walkingWithName, setWalkingWithName] = useState('');
+  const [uniqueFeatures, setUniqueFeatures] = useState('');
+  const [imageFile, setImageFile] = useState(null);
+  const [enableGPS, setEnableGPS] = useState(false);
+
+  const handleImageUpload = (event) => {
+    const file = event.target.files[0];
+    setImageFile(file);
+  };
+
+  const handleEnableGPSChange = (event) => {
+    setEnableGPS(event.target.checked);
+  };
+
+  return (
+    <div>
+      <h3>Campus? Military Base?
+        <br/>
+        Just feel like takin' a stroll?
+      </h3>
+      <label>
+        Are you walking with someone?
+        <input
+          type="checkbox"
+          checked={isWalkingWithSomeone}
+          onChange={(e) => setIsWalkingWithSomeone(e.target.checked)}
+        />
+      </label>
+      <br />
+      {isWalkingWithSomeone && (
+        <div>
+          <label>
+            Walking with:
+            <input
+              type="text"
+              value={walkingWithName}
+              onChange={(e) => setWalkingWithName(e.target.value)}
+            />
+          </label>
+          <br />
+          <label>
+            Unique features:
+            <textarea
+              value={uniqueFeatures}
+              onChange={(e) => setUniqueFeatures(e.target.value)}
+            />
+          </label>
+        </div>
+      )}
+      <br />
+      <label>
+        Upload an image:
+        <input type="file" onChange={handleImageUpload} />
+      </label>
+      <br />
+      <label>
+        Enable GPS to track your walk:
+        <input
+          type="checkbox"
+          checked={enableGPS}
+          onChange={handleEnableGPSChange}
+        />
+      </label>
+      <br />
+      <div>
+        {imageFile && (
+          <div>
+            <p>Image:</p>
+            <img src={URL.createObjectURL(imageFile)} alt="Uploaded" />
+          </div>
+        )}
+      </div>
+      <br/>
+      <button className="emergency">
+        <p1>Emergency?
+          <br/>
+          Call 911!
+        </p1>
+      </button>
+    </div>
+  );
+};
+
+export { WalkedPage };
 
 const App = () => {
   return (
@@ -449,7 +534,7 @@ const App = () => {
             <Route path="/panic-features" element={<PanicFeatures />} />
             <Route path="/rideshare" element={<RidesharePage />} />
             <Route path="/onlineDate" element={<OnlineDatePage />} />
-            <Route path="/walk" element={<WalkPage />} />
+            <Route path="/walk" element={<WalkedPage />} />
             <Route path="/client" element={<h3>Client</h3>} />
           </Routes>
         </div>

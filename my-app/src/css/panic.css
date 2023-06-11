@@ -21,4 +21,10 @@
     font-size: 72px;
     color: #fd0000;
   }
+
+  .emergency {
+    color: red;
+    font-weight: bold;
+    font-size: 20px;
+  }
   
