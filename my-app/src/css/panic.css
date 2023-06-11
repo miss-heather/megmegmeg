@@ -13,9 +13,9 @@
     transition: background-color 0.3s ease;
   }
   
-  /* .panic-button.red {
+  .panic-button.red {
     background-color: #fd0000;
-  } */
+  }
   
   .countdown {
     font-size: 72px;

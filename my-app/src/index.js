@@ -5,6 +5,8 @@ import { EmergencyContactsProvider } from './EmergencyContactsContext';
 import './css/emergencyContacts.css';
 import './css/Diary.css';
 import './css/Rideshare.css';
+import './css/WalkPage.css'
+// import './css/panic.css'
 import Home from './Home';
 import EmergencyContacts from './EmergencyContacts';
 import LiveLocation from './LiveLocation';
@@ -52,7 +54,7 @@ const Navigation = () => {
           {location.pathname !== '/panic-features' && (
             <li>
               <Link to="/panic-features" className={location.pathname === '/panic-features' ? 'active' : ''}>
-                Panic Features
+                Panic Button!
               </Link>
             </li>
           )}
@@ -155,7 +157,7 @@ const RidesharePage = () => {
           <h4>Uploaded Images:</h4>
           {images.map((image, index) => (
             <div key={index}>
-              <img src={URL.createObjectURL(image)} alt={`Uploaded Image ${index + 1}`} />
+              <img src={URL.createObjectURL(image)} alt={`Uploaded ${index + 1}`} />
             </div>
           ))}
         </div>
@@ -322,7 +324,7 @@ const OnlineDatePage = () => {
           <h4>Uploaded App Images:</h4>
           {images.map((image, index) => (
             <div key={index}>
-              <img src={URL.createObjectURL(image)} alt={`Uploaded Image ${index + 1}`} />
+              <img src={URL.createObjectURL(image)} alt={`Uploaded ${index + 1}`} />
             </div>
           ))}
         </div>
@@ -357,9 +359,80 @@ const OnlineDatePage = () => {
     </div>
   );
 };
-
 export default OnlineDatePage;
 
+const WalkPage = () => {
+  const [isWalkingWithSomeone, setIsWalkingWithSomeone] = useState(false);
+  const [walkingWithName, setWalkingWithName] = useState('');
+  const [uniqueFeatures, setUniqueFeatures] = useState('');
+  const [imageFile, setImageFile] = useState(null);
+
+  const handleImageUpload = (event) => {
+    const file = event.target.files[0];
+    setImageFile(file);
+  };
+
+  return (
+    <div>
+      <h2>Campus? Military Base?
+        <br/>
+        Just feel like a stroll?
+      </h2>
+      <label>
+        Are you walking with someone?
+        <input
+          type="checkbox"
+          checked={isWalkingWithSomeone}
+          onChange={(e) => setIsWalkingWithSomeone(e.target.checked)}
+        />
+      </label>
+      <br />
+      {isWalkingWithSomeone && (
+        <div>
+          <label>
+            Walking with:
+            <input
+              type="text"
+              value={walkingWithName}
+              onChange={(e) => setWalkingWithName(e.target.value)}
+            />
+          </label>
+          <br />
+          <label>
+            Unique features:
+            <textarea
+              value={uniqueFeatures}
+              onChange={(e) => setUniqueFeatures(e.target.value)}
+            />
+          </label>
+        </div>
+      )}
+      <br />
+      <label>
+        Upload an image:
+        <input type="file" onChange={handleImageUpload} />
+      </label>
+      <br />
+      <div>
+        {/* <h4>Summary:</h4>
+        <p>Walking with someone: {isWalkingWithSomeone ? 'Yes' : 'No'}</p> */}
+        {/* {isWalkingWithSomeone && (
+          <div>
+            <p>Walking with: {walkingWithName}</p>
+            <p>Unique features: {uniqueFeatures}</p>
+          </div> */}
+        
+        {imageFile && (
+          <div>
+            <p>Image:</p>
+            <img src={URL.createObjectURL(imageFile)} alt="Uploaded" />
+          </div>
+        )}
+      </div>
+    </div>
+  );
+};
+export { WalkPage };
 
 const App = () => {
   return (
@@ -376,8 +449,8 @@ const App = () => {
             <Route path="/panic-features" element={<PanicFeatures />} />
             <Route path="/rideshare" element={<RidesharePage />} />
             <Route path="/onlineDate" element={<OnlineDatePage />} />
-            <Route path="/walk" element={<h3>Just go for a walk</h3>} />
-            <Route path="/client" element={<h3>Entertaining a Client</h3>} />
+            <Route path="/walk" element={<WalkPage />} />
+            <Route path="/client" element={<h3>Client</h3>} />
           </Routes>
         </div>
       </EmergencyContactsProvider>
