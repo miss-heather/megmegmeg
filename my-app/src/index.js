@@ -516,6 +516,8 @@ const NewClientPage = () => {
   const [emergencyName, setEmergencyName] = useState('');
   const [emergencyPhone, setEmergencyPhone] = useState('');
   const [engagementTime, setEngagementTime] = useState('');
+  const [sendClientInfo, setSendClientInfo] = useState(false);
+  const [clientEmergencyContact, setClientEmergencyContact] = useState('');
 
   const handleClientNameChange = (event) => {
     setClientName(event.target.value);
@@ -578,6 +580,14 @@ const NewClientPage = () => {
     setEngagementTime(event.target.value);
   };
 
+  const handleSendClientInfoChange = (event) => {
+    setSendClientInfo(event.target.checked);
+  };
+
+  const handleClientEmergencyContactChange = (event) => {
+    setClientEmergencyContact(event.target.value);
+  };
+
   return (
     <div>
       <h2>With a Client?</h2>
@@ -604,7 +614,32 @@ const NewClientPage = () => {
         </div>
       )}
       <br/>
+      <label>
+        Would you like to send your Client's info to your Emergency Contact?
+        <input
+          type="checkbox"
+          checked={sendClientInfo}
+          onChange={handleSendClientInfoChange}
+        />
+      </label>
+      {sendClientInfo && (
+        <div>
+          <label>
+            Emergency Contact:
+            <br />
+            <input
+              type="text"
+              value={clientEmergencyContact}
+              onChange={handleClientEmergencyContactChange}
+            />
+          </label>
+        </div>
+      )}
+      <br />
       <br/>
+      <div>
+        <h2>What's on the agenda?</h2>
+      </div>
       <label>
         Itinerary Timeline:
         <br />
@@ -713,6 +748,7 @@ const NewClientPage = () => {
     </div>
   );
 };
+
 
 // export default NewClientPage;
 const Footer = () => {
