@@ -684,7 +684,8 @@ const NewClientPage = () => {
               <br />
               <br />
               <label>
-                If Parameters are left, or are not reached by
+                If Parameters are left, or are not reached by:
+                <br/>
                 <input
                   type="time"
                   value={engagementTime}

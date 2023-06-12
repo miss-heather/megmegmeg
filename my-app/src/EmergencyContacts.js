@@ -33,7 +33,6 @@ const EmergencyContacts = () => {
     <div>
       <h2>Emergency Contacts</h2>
       <p className={`calling-911 ${calling911 ? 'visible' : ''}`}>
-        Calling 911...
       </p>
       <form onSubmit={handleSubmit}>
         <label htmlFor="name">Name:</label>
@@ -43,7 +42,7 @@ const EmergencyContacts = () => {
           value={name}
           onChange={(e) => setName(e.target.value)}
         />
-
+        <br/>
         <label htmlFor="phoneNumber">Phone Number:</label>
         <input
           type="text"
@@ -51,7 +50,7 @@ const EmergencyContacts = () => {
           value={phoneNumber}
           onChange={(e) => setPhoneNumber(e.target.value)}
         />
-
+        <br/>
         <label htmlFor="email">Email:</label>
         <input
           type="email"
@@ -59,7 +58,7 @@ const EmergencyContacts = () => {
           value={email}
           onChange={(e) => setEmail(e.target.value)}
         />
-
+        <br/>
         <label htmlFor="relationship">Relationship:</label>
         <input
           type="text"
@@ -67,7 +66,7 @@ const EmergencyContacts = () => {
           value={relationship}
           onChange={(e) => setRelationship(e.target.value)}
         />
-
+        <br/>
         <button type="submit">Save Contact</button>
       </form>
 
